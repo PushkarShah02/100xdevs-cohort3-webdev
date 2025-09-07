@@ -1,42 +1,68 @@
-import SidebarCard from "./components/basic-project-1";
 import { useState, useEffect } from "react";
+import SidebarToggleSVG from "./components/icons/sidebarToggle";
+import SidebarProjectSVG from "./components/icons/sidebarproject";
+import SidebarSettingSVG from "./components/icons/sidebarsetting";
+import SidebarHomeSVG from "./components/icons/sidebarhome";
 
 function App() {
-  const [darkmode, setDarkmode] = useState(() => {
-    // Load saved preference from localStorage
-    return localStorage.getItem("theme") === "dark";
-  });
+  const [sidebarOpen, setsidebarToggle] = useState(true)
+  return (
+    <div className="flex">
+      <Sidebar sidebarOpen={sidebarOpen} setsidebarToggle={setsidebarToggle} />
+      <MainContent sidebarOpen={sidebarOpen} />
+    </div>
+  );
+}
 
-  // Sync dark mode with <html> tag and localStorage
-  useEffect(() => {
-    if (darkmode) {
-      console.log(document.documentElement.classList)
-      document.documentElement.classList.add("dark");
-      localStorage.setItem("theme", "dark");
-    } else {
-      console.log(document.documentElement.classList)
-      document.documentElement.classList.remove("dark");
-      localStorage.setItem("theme", "light");
-    }
-  }, [darkmode]);
-
-  // Toggle dark mode
-  function flipMode() {
-    setDarkmode((prev) => !prev);
+function Sidebar({ sidebarOpen, setsidebarToggle }) {
+  if (sidebarOpen) {
+    return (
+      <div className="w-64  h-screen bg-gray-800 text-white p-4 shadow-lg">
+        <div onClick={() => { setsidebarToggle(!sidebarOpen) }} className="mb-4"><SidebarToggleSVG /></div>
+        <ul className="space-y-2">
+          <li className="hover:bg-gray-700 p-2 rounded cursor-pointer">Dashboard</li>
+          <li className="hover:bg-gray-700 p-2 rounded cursor-pointer">Projects</li>
+          <li className="hover:bg-gray-700 p-2 rounded cursor-pointer">Settings</li>
+        </ul>
+      </div>
+    );
   }
 
-  return (
-    <div className="h-screen flex flex-col justify-center items-center bg-white dark:bg-blue-900 dark:text-white">
-      <h1 className="text-3xl font-bold mb-4">Dark Mode Demo</h1>
+  else{
+    return (
+      <div className="w-14  h-screen bg-gray-800 text-white p-4 shadow-lg">
+        <div onClick={() => { setsidebarToggle(!sidebarOpen) }} className="mb-4"><SidebarToggleSVG /></div>
+        <ul >
+          <li className="hover:bg-gray-700 mb-5 rounded cursor-pointer"><SidebarHomeSVG /></li>
+          <li className="hover:bg-gray-700 mb-5 rounded cursor-pointer"><SidebarProjectSVG /></li>
+          <li className="hover:bg-gray-700 mb-5 rounded cursor-pointer"><SidebarSettingSVG /></li>
+        </ul>
+      </div>
+    );
+  }
 
-      <button
-        onClick={flipMode}
-        className="px-4 py-2 rounded-lg bg-gray-800 text-white dark:bg-gray-200 dark:text-black hover:scale-105 transition-all"
-      >
-        {darkmode ? "Switch to Light Mode" : "Switch to Dark Mode"}
-      </button>
+}
+
+function MainContent() {
+  return (
+    <div className="flex-1 p-6">
+      {/* Top Section */}
+      <div className="h-48 bg-black rounded-xl mb-6"></div>
+
+      {/* Grid Section */}
+      <div className="grid grid-cols-12 gap-6">
+        {/* Card 1 */}
+        <div className="h-96 rounded-2xl shadow bg-red-200 md:col-span-2 col-span-12 -translate-y-24"></div>
+
+        {/* Card 2 */}
+        <div className="h-96 rounded-2xl shadow bg-green-200 md:col-span-5 col-span-12"></div>
+
+        {/* Card 3 */}
+        <div className="h-96 rounded-2xl shadow bg-yellow-200 md:col-span-4 col-span-12"></div>
+      </div>
     </div>
   );
 }
 
 export default App;
+
