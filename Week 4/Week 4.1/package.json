@@ -1,0 +1,16 @@
+{
+  "name": "week-4.1",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "Start": "node 2index.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "chalk": "^5.4.1",
+    "commander": "^13.1.0"
+  }
+}
