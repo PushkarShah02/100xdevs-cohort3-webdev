@@ -1,11 +1,15 @@
-
-function delayed(fn: () => void): number {
-    setTimeout(fn, 2000)
-    return 1;
+function greet(user:{
+    name:string,
+    age:number
+}){
+    console.log("hello " + user.name)
 }
 
-function hello() {
-    console.log("Hello after 2 sec")
+let user :{
+    name:string,
+    age:number
+}={
+    name:"Pushkar",
+    age:22
 }
-
-delayed(hello);
+greet(user);
