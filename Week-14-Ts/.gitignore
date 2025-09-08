@@ -1,0 +1,22 @@
+# Node modules
+node_modules/
+
+# Build output
+dist/
+*.js
+*.js.map
+*.d.ts
+*.d.ts.map
+
+# TypeScript build info
+tsconfig.tsbuildinfo
+
+# Logs
+*.log
+
+# Environment variables
+.env
+.env.local
+
+# VS Code settings
+.vscode/
